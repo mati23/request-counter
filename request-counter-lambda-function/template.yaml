@@ -11,13 +11,13 @@ Globals:
     Timeout: 20
 
 Resources:
-  HelloWorldFunction:
+  RequestCounterLambdaFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: HelloWorldFunction
-      Handler: helloworld.App::handleRequest
+      CodeUri: RequestCounterLambdaFunction
+      Handler: request.counter.lambda.function.src.main.java.request.counter.lambda.function.RequestCounterLambdaFunction::handleRequest
       Runtime: java11
-      MemorySize: 512
+      MemorySize: 128
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
           PARAM1: VALUE

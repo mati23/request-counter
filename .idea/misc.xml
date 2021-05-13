@@ -6,6 +6,8 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/request-counter-lambda-function/HelloWorldFunction/pom.xml" />
+        <option value="$PROJECT_DIR$/request-counter-lambda-function/RequestCounterLambdaFunction/pom.xml" />
+        <option value="$PROJECT_DIR$/request-counter-lambda-function/pom.xml" />
       </list>
     </option>
   </component>

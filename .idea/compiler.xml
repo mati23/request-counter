@@ -6,9 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="RequestCounterLambdaFunction" />
-        <module name="request-counter" />
+        <module name="request-counter-lambda-function" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="RequestCounterLambdaFunction" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
