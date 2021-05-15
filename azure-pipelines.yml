@@ -15,8 +15,8 @@ steps:
 
   - task: CmdLine@2
     inputs:
-      - script: mvn clean install
-      - script: sam deploy --region sa-east-1 --stack-name request-counter-stack --s3-bucket request-counter-bucket --capabilities CAPABILITY_IAM --debug
+      - script: 'mvn clean install'
+      - script: 'sam deploy --region sa-east-1 --stack-name request-counter-stack --s3-bucket request-counter-bucket --capabilities CAPABILITY_IAM --debug'
 
 
   - task: Maven@3
