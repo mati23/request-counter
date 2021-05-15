@@ -7,12 +7,12 @@ pool:
 
 variables:
   - group: AWS
-
-steps:
-  - script: set AWS_ACCESS_KEY_ID=$(AWS_REGION)
-  - script: set AWS_ACCESS_KEY_ID=$(AWS_ACCESS_KEY_ID) # uses macro syntax
-  - script: set AWS_SECRET_ACCESS_KEY=$(AWS_SECRET_ACCESS_KEY)
-  - script: sudo aws configure
+  - name: AWS_ACCESS_KEY_ID
+    value: $(aws.access.key.id)
+  - name: AWS_SECRET_ACCESS_KEY
+    value: $(aws.secret.access.key)
+  - name: AWS_REGION
+    value: $(aws.region)
 
   - task: UsePythonVersion@0
     inputs:
