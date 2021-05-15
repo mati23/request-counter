@@ -15,7 +15,7 @@ steps:
 
   - task: CmdLine@2
     inputs:
-      script: 'sam --help'
+      script: 'mvn clean install '
 
   - task: Maven@3
     inputs:

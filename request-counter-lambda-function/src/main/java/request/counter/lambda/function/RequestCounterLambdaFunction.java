@@ -16,9 +16,9 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
 /**
  * Handler for requests to Lambda function.
  */
-public class RequestCounterLambdaFunction implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
+public class RequestCounterLambdaFunction implements RequestHandler<String, APIGatewayProxyResponseEvent> {
 
-    public APIGatewayProxyResponseEvent handleRequest(final APIGatewayProxyRequestEvent input, final Context context) {
+    public APIGatewayProxyResponseEvent handleRequest(final String input, final Context context) {
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
         headers.put("X-Custom-Header", "application/json");

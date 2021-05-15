@@ -14,8 +14,8 @@ Resources:
   RequestCounterLambdaFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: RequestCounterLambdaFunction
-      Handler: request.counter.lambda.function.src.main.java.request.counter.lambda.function.RequestCounterLambdaFunction::handleRequest
+      CodeUri: target/request-counter-lambda-function-1.0.jar
+      Handler: request.counter.lambda.function.RequestCounterLambdaFunction::handleRequest
       Runtime: java11
       MemorySize: 128
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
@@ -35,9 +35,9 @@ Outputs:
   HelloWorldApi:
     Description: "API Gateway endpoint URL for Prod stage for Hello World function"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
-  HelloWorldFunction:
+  RequestCounterLambdaFunction:
     Description: "Hello World Lambda Function ARN"
-    Value: !GetAtt HelloWorldFunction.Arn
-  HelloWorldFunctionIamRole:
+    Value: !GetAtt RequestCounterLambdaFunction.Arn
+  RequestCounterLambdaFunctionRole:
     Description: "Implicit IAM Role created for Hello World function"
-    Value: !GetAtt HelloWorldFunctionRole.Arn
+    Value: 'arn:aws:iam::506878379499:role/AdminAccess'
