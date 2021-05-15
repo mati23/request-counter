@@ -29,8 +29,8 @@ steps:
 
   - task: CmdLine@2
     inputs:
-      - script: 'mvn clean install'
+      - script: 'echo Mateus Arruda'
 
-  - task: CmdLine@2
-    inputs:
-      - script: 'sam deploy --region sa-east-1 --stack-name request-counter-stack --s3-bucket request-counter-bucket --capabilities CAPABILITY_IAM --debug'
+#  - task: CmdLine@2
+#    inputs:
+#      - script: 'sam deploy --region sa-east-1 --stack-name request-counter-stack --s3-bucket request-counter-bucket --capabilities CAPABILITY_IAM --debug'
