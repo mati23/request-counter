@@ -5,6 +5,9 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  - group: AWS
+
 steps:
   - task: CmdLine@2
     inputs:
