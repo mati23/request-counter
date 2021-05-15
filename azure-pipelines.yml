@@ -6,6 +6,17 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+  - task: UsePythonVersion@0
+        inputs:
+          versionSpec: '3.6'
+          addToPath: true
+          architecture: 'x64'
+          script: pip install aws-sam-cli
+
+  - task: CmdLine@2
+    inputs:
+      script: 'sam --help'
+
   - task: Maven@3
     inputs:
       mavenPomFile: 'pom.xml'
@@ -16,13 +27,6 @@ steps:
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
       goals: 'package'
-
-  - task: UsePythonVersion@0
-    inputs:
-      versionSpec: '3.6'
-      addToPath: true
-      architecture: 'x64'
-      script: pip install aws-sam-cli
 # Build your Java project and run tests with Apache Maven.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
