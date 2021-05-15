@@ -9,11 +9,11 @@ variables:
   - group: AWS
 
 steps:
-  - task: CmdLine@2
-    inputs:
-      script: 'echo $(variables.AWS_ACCESS_KEY_ID)'
-      #workingDirectory: # Optional
-      #failOnStderr: false # Optional
+  - script: echo $(AWS_ACCESS_KEY_ID) # uses macro syntax
+  - script: echo $(variables.AWS_ACCESS_KEY_ID)
+  - script: echo Teste
+
+
   - task: UsePythonVersion@0
     inputs:
       versionSpec: '3.6'
