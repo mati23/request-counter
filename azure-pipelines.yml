@@ -18,7 +18,6 @@ steps:
       script:
         - mvn clean install
         - sam deploy --region sa-east-1 --stack-name request-counter-stack --s3-bucket request-counter-bucket --capabilities CAPABILITY_IAM --debug
-'
 
   - task: Maven@3
     inputs:
