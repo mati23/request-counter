@@ -6,6 +6,11 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+  - task: CmdLine@2
+    inputs:
+      script: 'echo $AWS_ACCESS_KEY_ID'
+      #workingDirectory: # Optional
+      #failOnStderr: false # Optional
   - task: UsePythonVersion@0
     inputs:
       versionSpec: '3.6'
