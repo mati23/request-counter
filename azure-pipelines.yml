@@ -14,6 +14,7 @@ variables:
   - name: AWS_REGION
     value: $(aws.region)
 
+steps:
   - task: UsePythonVersion@0
     inputs:
       versionSpec: '3.6'
