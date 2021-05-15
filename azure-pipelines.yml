@@ -26,6 +26,7 @@ steps:
       templateFile: 'template.yml'
       s3BucketName: 'request-counter-bucket'
       useChangeSet: true
+      changeSetName: 'request-counter-changeset'
       capabilityAutoExpand: true
       onFailure: 'DELETE'
       logRequest: true
