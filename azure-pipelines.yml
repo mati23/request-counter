@@ -9,6 +9,7 @@ variables:
   - group: AWS
 
 steps:
+  - script: set AWS_ACCESS_KEY_ID=$(AWS_REGION)
   - script: set AWS_ACCESS_KEY_ID=$(AWS_ACCESS_KEY_ID) # uses macro syntax
   - script: set AWS_SECRET_ACCESS_KEY=$(AWS_SECRET_ACCESS_KEY)
 
