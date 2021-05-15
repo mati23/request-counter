@@ -29,7 +29,12 @@ steps:
 
   - task: CmdLine@2
     inputs:
-      - script: 'echo Mateus Arruda'
+      script: 'echo Write your commands here.'
+      #workingDirectory: # Optional
+      #failOnStderr: false # Optional
+#  - task: CmdLine@2
+#    inputs:
+#      - script: 'echo Mateus Arruda'
 
 #  - task: CmdLine@2
 #    inputs:
