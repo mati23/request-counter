@@ -11,7 +11,7 @@ variables:
 steps:
   - task: CmdLine@2
     inputs:
-      script: 'echo $AWS_ACCESS_KEY_ID'
+      script: 'echo $(variables.AWS_ACCESS_KEY_ID)'
       #workingDirectory: # Optional
       #failOnStderr: false # Optional
   - task: UsePythonVersion@0
