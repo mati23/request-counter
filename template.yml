@@ -15,7 +15,7 @@ Parameters:
     Default: 'request-counter-bucket'
     Type: String
   RequestCounterLambda:
-    Default: request.counter.lambda.function.src.main.java.request.counter.lambda.function.RequestCounterLambdaFunction::handleRequest
+    Default: request.counter.lambda.function.request.counter.lambda.function.RequestCounterLambdaFunction::handleRequest
     Type: String
 
 Resources:
