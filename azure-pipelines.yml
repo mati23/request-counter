@@ -43,8 +43,9 @@ steps:
       #failOnStderr: false # Optional
   - task: CmdLine@2
     inputs:
-    - script: 'sam build'
-    - script: 'sam deploy --region sa-east-1 --stack-name request-counter-stack --s3-bucket request-counter-bucket --capabilities CAPABILITY_IAM --debug'
+      script:
+        - 'sam build'
+        - 'sam deploy --region sa-east-1 --stack-name request-counter-stack --s3-bucket request-counter-bucket --capabilities CAPABILITY_IAM --debug'
       #workingDirectory: # Optional
       #failOnStderr: false # Optional
 
