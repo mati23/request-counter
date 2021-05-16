@@ -1,4 +1,4 @@
-package request.counter.lambda.function;
+package handler;
 
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import static org.junit.Assert.assertEquals;

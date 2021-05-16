@@ -1,4 +1,4 @@
-package request.counter.lambda.function;
+package handler;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.lambda.runtime.Context;
@@ -36,13 +37,9 @@ public class RequestCounterLambdaFunction implements RequestHandler<APIGatewayPr
 
         APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent()
                 .withHeaders(headers);
-        Regions clientRegion = Regions.SA_EAST_1;
-        AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
-                .withRegion(clientRegion)
-                .withCredentials(new ProfileCredentialsProvider())
-                .build();
+
         try{
-            getObjectFromS3(s3Client, S3_BUCKET, S3_BUCKET_KEY);
+            getObjectFromS3(S3_BUCKET, S3_BUCKET_KEY);
         }catch (IOException e){
             System.out.println(e.getMessage());
         }
@@ -68,9 +65,12 @@ public class RequestCounterLambdaFunction implements RequestHandler<APIGatewayPr
         }
     }
 
-    public static void getObjectFromS3(AmazonS3 s3Client,
-                                       String bucketName,
+    public static void getObjectFromS3(String bucketName,
                                        String bucketKey) throws IOException{
+        System.out.println("Loading S3 Object...");
+        AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+                .withCredentials(DefaultAWSCredentialsProviderChain.getInstance())
+                .build();
         S3Object fullObject = null, objectPortion = null, headerOverrideObject = null;
         fullObject = s3Client.getObject(new GetObjectRequest(bucketName,bucketKey));
         System.out.println("Content-Type:" + fullObject.getObjectMetadata().getContentType());

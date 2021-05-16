@@ -15,17 +15,18 @@ Parameters:
     Default: 'request-counter-bucket'
     Type: String
   RequestCounterLambda:
-    Default: request.counter.lambda.function.request.counter.lambda.function.RequestCounterLambdaFunction::handleRequest
+    Default: handler.RequestCounterLambdaFunction::handleRequest
     Type: String
 
 Resources:
   RequestCounterLambdaFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
+      Role: arn:aws:iam::506878379499:role/request-counter-role
       CodeUri: request-counter-lambda-function/
       Handler: !Ref RequestCounterLambda
       Runtime: java11
-      MemorySize: 128
+      MemorySize: 512
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
           PARAM1: VALUE
