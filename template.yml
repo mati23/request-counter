@@ -22,7 +22,7 @@ Resources:
   RequestCounterLambdaFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: request-counter-lambda-function/target/request-counter-lambda-function-1.0.jar
+      CodeUri: request-counter-lambda-function/
       Handler: !Ref RequestCounterLambda
       Runtime: java11
       MemorySize: 128
