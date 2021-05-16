@@ -36,6 +36,11 @@ Resources:
             Path: /hello
             Method: get
 
+  RequestCounterLambdaLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+      RetentionInDays: 1
 #Outputs:
 #  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
 #  # Find out more about other implicit resources you can reference within SAM

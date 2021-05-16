@@ -2,21 +2,32 @@ package request.counter.lambda.function;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.GetObjectRequest;
+import com.amazonaws.services.s3.model.S3Object;
 
 /**
  * Handler for requests to Lambda function.
  */
 public class RequestCounterLambdaFunction implements RequestHandler<String, APIGatewayProxyResponseEvent> {
+
+    private final String S3_BUCKET = "request-counter-bucket";
+
+    private final String S3_BUCKET_KEY = "request-counter-directory/request-counter-file.txt";
 
     public APIGatewayProxyResponseEvent handleRequest(final String input, final Context context) {
         Map<String, String> headers = new HashMap<>();
@@ -25,6 +36,17 @@ public class RequestCounterLambdaFunction implements RequestHandler<String, APIG
 
         APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent()
                 .withHeaders(headers);
+        Regions clientRegion = Regions.SA_EAST_1;
+        AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+                .withRegion(clientRegion)
+                .withCredentials(new ProfileCredentialsProvider())
+                .build();
+        try{
+            getObjectFromS3(s3Client, S3_BUCKET, S3_BUCKET_KEY);
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+        
         try {
             final String pageContents = this.getPageContents("https://checkip.amazonaws.com");
             String output = String.format("{ \"message\": \"hello world\", \"location\": \"%s\" }", pageContents);
@@ -44,5 +66,26 @@ public class RequestCounterLambdaFunction implements RequestHandler<String, APIG
         try(BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()))) {
             return br.lines().collect(Collectors.joining(System.lineSeparator()));
         }
+    }
+
+    public static void getObjectFromS3(AmazonS3 s3Client,
+                                       String bucketName,
+                                       String bucketKey) throws IOException{
+        S3Object fullObject = null, objectPortion = null, headerOverrideObject = null;
+        fullObject = s3Client.getObject(new GetObjectRequest(bucketName,bucketKey));
+        System.out.println("Content-Type:" + fullObject.getObjectMetadata().getContentType());
+        System.out.println("Content:" );
+        displayTextInputStream(fullObject.getObjectContent());
+
+    }
+
+    private static void displayTextInputStream(InputStream input) throws IOException {
+        // Read the text input stream one line at a time and display each line.
+        BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+        String line = null;
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+        }
+        System.out.println();
     }
 }
