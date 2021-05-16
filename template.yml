@@ -39,7 +39,7 @@ Resources:
   RequestCounterLambdaLogGroup:
     Type: AWS::Logs::LogGroup
     Properties:
-      LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+      LogGroupName: !Sub "/aws/lambda/${RequestCounterLambdaFunction}"
       RetentionInDays: 1
 #Outputs:
 #  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
