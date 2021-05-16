@@ -23,13 +23,13 @@ import com.amazonaws.services.s3.model.S3Object;
 /**
  * Handler for requests to Lambda function.
  */
-public class RequestCounterLambdaFunction implements RequestHandler<String, APIGatewayProxyResponseEvent> {
+public class RequestCounterLambdaFunction implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
     private final String S3_BUCKET = "request-counter-bucket";
 
     private final String S3_BUCKET_KEY = "request-counter-directory/request-counter-file.txt";
 
-    public APIGatewayProxyResponseEvent handleRequest(final String input, final Context context) {
+    public APIGatewayProxyResponseEvent handleRequest(final APIGatewayProxyRequestEvent input, final Context context) {
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
         headers.put("X-Custom-Header", "application/json");
@@ -46,7 +46,7 @@ public class RequestCounterLambdaFunction implements RequestHandler<String, APIG
         }catch (IOException e){
             System.out.println(e.getMessage());
         }
-        
+
         try {
             final String pageContents = this.getPageContents("https://checkip.amazonaws.com");
             String output = String.format("{ \"message\": \"hello world\", \"location\": \"%s\" }", pageContents);
